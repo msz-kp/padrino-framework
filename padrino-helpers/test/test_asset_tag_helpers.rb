@@ -185,26 +185,27 @@ describe "AssetTagHelpers" do
     end
 
     it 'should display meta tag with given content and http-equiv' do
-      actual_html = meta_tag("text/html; charset=UTF-8", :"http-equiv" => "Content-Type")
-      assert_html_has_tag(actual_html, "meta", :"http-equiv" => "Content-Type", :content => "text/html; charset=UTF-8")
+      actual_html = meta_tag("text/html; charset=UTF-8", :"http-equiv" => "content-type")
+      assert_html_has_tag(actual_html, "meta", :"http-equiv" => "content-type", :content => "text/html; charset=UTF-8")
     end
 
     it 'should display meta tag element in haml' do
       get "/haml/meta_tag"
+
       assert_response_has_tag 'meta', :content => "weblog,news", :name => "keywords"
-      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
+      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "content-type"
     end
 
     it 'should display meta tag element in erb' do
       get "/erb/meta_tag"
       assert_response_has_tag 'meta', :content => "weblog,news", :name => "keywords"
-      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
+      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "content-type"
     end
 
     it 'should display meta tag element in slim' do
       get "/slim/meta_tag"
       assert_response_has_tag 'meta', :content => "weblog,news", :name => "keywords"
-      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "Content-Type"
+      assert_response_has_tag 'meta', :content => "text/html; charset=UTF-8", :"http-equiv" => "content-type"
     end
   end
 

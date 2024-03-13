@@ -149,13 +149,13 @@ module Padrino
       # Get/Set the content_type
       #
       # @param [String, nil] type
-      #   The Content-Type to use.
+      #   The content-type to use.
       #
       # @param [Symbol, nil] type.
-      #   Look and parse the given symbol to the matched Content-Type.
+      #   Look and parse the given symbol to the matched content-type.
       #
       # @param [Hash] params
-      #   Additional params to append to the Content-Type.
+      #   Additional params to append to the content-type.
       #
       # @example
       #   case content_type
@@ -164,10 +164,10 @@ module Padrino
       #   end
       #
       #   content_type :js
-      #   # => set the response with 'application/javascript' Content-Type
+      #   # => set the response with 'application/javascript' content-type
       #   content_type 'text/html'
       #
-      #   # => set directly the Content-Type to 'text/html'
+      #   # => set directly the content-type to 'text/html'
       #
       def content_type(type=nil, params={})
         if type

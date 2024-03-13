@@ -45,7 +45,7 @@ describe "Core" do
 
         def call(env)
           status, headers, body = @app.call(env)
-          headers["Middleware-Called"] = "yes"
+          headers["middleware-called"] = "yes"
           [status, headers, body]
         end
       }

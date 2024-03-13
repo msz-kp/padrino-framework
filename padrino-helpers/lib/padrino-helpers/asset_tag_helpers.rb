@@ -164,8 +164,8 @@ module Padrino
       #   meta_tag "weblog,news", :name => "keywords"
       #   # Generates: <meta name="keywords" content="weblog,news" />
       #
-      #   meta_tag "text/html; charset=UTF-8", 'http-equiv' => "Content-Type"
-      #   # Generates: <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      #   meta_tag "text/html; charset=UTF-8", 'http-equiv' => "content-type"
+      #   # Generates: <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
       #
       def meta_tag(content, options={})
         options = { "content" => content }.update(options)

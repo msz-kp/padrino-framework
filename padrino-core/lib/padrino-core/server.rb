@@ -30,7 +30,7 @@ module Padrino
   ##
   # This module builds a Padrino server to run the project based on available handlers.
   #
-  class Server < Rack::Server
+  class Server < Rackup::Server
     DEFAULT_ADDRESS = { :Host => '127.0.0.1', :Port => 3000 }
 
     # Server Handlers
@@ -77,11 +77,11 @@ module Padrino
     #
     def self.detect_rack_handler
       Handlers.each do |handler|
-        
+
           return handler if Rack::Handler.get(handler.to_s.downcase)
         rescue LoadError
         rescue NameError
-        
+
       end
       fail "Server handler (#{Handlers.join(', ')}) not found."
     end

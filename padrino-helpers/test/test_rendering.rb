@@ -764,7 +764,7 @@ describe "Rendering" do
         get(:index){ builder "xml.foo" }
       end
       get '/'
-      assert_equal "application/xml;charset=utf-8", response['Content-Type']
+      assert_equal "application/xml;charset=utf-8", response['content-type']
     end
   end
 

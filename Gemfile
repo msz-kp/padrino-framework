@@ -45,7 +45,7 @@ group :development do
   gem "minitest", ">= 4.0"
   gem "mocha",    ">= 2.0"
   gem "oga",       ">= 2.5", "< 3"
-  gem "rack",      ">= 1.3.0", "< 3"
+  gem "rackup",      ">= 2.1", "< 3"
   gem "rack-test", ">= 0.6.3"
   gem "rake",      ">= 10.5.0"
   gem 'rb-readline', '~> 0.4.2'

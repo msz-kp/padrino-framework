@@ -878,7 +878,7 @@ module Padrino
 
       ##
       # Return the request format, this is useful when we need to respond to
-      # a given Content-Type.
+      # a given content-type.
       #
       # @param [Symbol, nil] type
       #

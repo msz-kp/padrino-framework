@@ -11,20 +11,20 @@ describe "Filters" do
     get '/foo', {}, { 'HTTP_ACCEPT' => 'application/xml' }
     assert ok?
     assert_equal 'application/xml', body
-    assert_equal 'application/xml;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/xml;charset=utf-8', response.headers['content-type']
 
     get '/foo.xml'
     assert ok?
-    assert_equal 'application/xml;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/xml;charset=utf-8', response.headers['content-type']
 
     get '/foo', {}, { 'HTTP_ACCEPT' => 'application/javascript' }
     assert ok?
     assert_equal 'application/javascript', body
-    assert_equal 'application/javascript;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/javascript;charset=utf-8', response.headers['content-type']
 
     get '/foo.js'
     assert ok?
-    assert_equal 'application/javascript;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/javascript;charset=utf-8', response.headers['content-type']
 
     get '/foo', {}, { "HTTP_ACCEPT" => 'text/html' }
     assert_equal 406, status

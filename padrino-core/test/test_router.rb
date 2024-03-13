@@ -12,7 +12,7 @@ describe "Router" do
       [200, {
         'X-ScriptName' => env['SCRIPT_NAME'],
         'X-PathInfo' => env['PATH_INFO'],
-        'Content-Type' => 'text/plain'
+        'content-type' => 'text/plain'
       }, [""]]
     }
     map = Padrino::Router.new(
@@ -75,7 +75,7 @@ describe "Router" do
       [scary ? 404 : 200, {
         'X-ScriptName' => env['SCRIPT_NAME'],
         'X-PathInfo' => env['PATH_INFO'],
-        'Content-Type' => 'text/plain'
+        'content-type' => 'text/plain'
       }, [""]]
     }
     api = lambda { |env|
@@ -84,7 +84,7 @@ describe "Router" do
         'X-API' => spooky,
         'X-ScriptName' => env['SCRIPT_NAME'],
         'X-PathInfo' => env['PATH_INFO'],
-        'Content-Type' => 'application/json'
+        'content-type' => 'application/json'
       }, [""]]
     }
     map = Padrino::Router.new(
@@ -101,21 +101,21 @@ describe "Router" do
     res = Rack::MockRequest.new(map).get("/bar/mitzvah")
     assert res.ok?
     refute_includes res, "X-API"
-    assert_equal 'text/plain', res["Content-Type"]
+    assert_equal 'text/plain', res["content-type"]
     assert_equal "/bar", res["X-ScriptName"]
     assert_equal "/mitzvah", res["X-PathInfo"]
 
     res = Rack::MockRequest.new(map).get("/bar?spooky")
     assert res.ok?
     assert_equal true, res["X-API"]
-    assert_equal 'application/json', res["Content-Type"]
+    assert_equal 'application/json', res["content-type"]
     assert_equal "/bar", res["X-ScriptName"]
     assert_equal "/", res["X-PathInfo"]
 
     res = Rack::MockRequest.new(map).get("/bar/scary")
     assert_equal 404, res.status
     refute_includes res, "X-API"
-    assert_equal 'text/plain', res["Content-Type"]
+    assert_equal 'text/plain', res["content-type"]
     assert_equal "/bar", res["X-ScriptName"]
     assert_equal "/scary", res["X-PathInfo"]
   end
@@ -192,19 +192,19 @@ describe "Router" do
     map = Padrino::Router.new(
      { :host => "foo.org", :to => lambda { |env|
        [200,
-        { "Content-Type" => "text/plain",
+        { "content-type" => "text/plain",
           "X-Position" => "foo.org",
           "X-Host" => env["HTTP_HOST"] || env["SERVER_NAME"],
         }, [""]]}},
      { :host => "subdomain.foo.org", :to => lambda { |env|
        [200,
-        { "Content-Type" => "text/plain",
+        { "content-type" => "text/plain",
           "X-Position" => "subdomain.foo.org",
           "X-Host" => env["HTTP_HOST"] || env["SERVER_NAME"],
         }, [""]]}},
      { :host => /.*\.bar.org/, :to => lambda { |env|
        [200,
-        { "Content-Type" => "text/plain",
+        { "content-type" => "text/plain",
           "X-Position" => "bar.org",
           "X-Host" => env["HTTP_HOST"] || env["SERVER_NAME"],
         }, [""]]}}
@@ -266,7 +266,7 @@ describe "Router" do
   it 'should keep the same environment object' do
     app = lambda { |env|
       env['path'] = env['PATH_INFO']
-      [200, {'Content-Type' => 'text/plain'}, [""]]
+      [200, {'content-type' => 'text/plain'}, [""]]
     }
     map = Padrino::Router.new(
       { :path => '/bar',     :to => app },

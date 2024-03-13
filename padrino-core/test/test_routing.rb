@@ -39,8 +39,8 @@ describe "Routing" do
       set :public_folder, File.dirname(__FILE__)
     end
     get "/#{File.basename(__FILE__)}"
-    assert headers.has_key?('Cache-Control')
-    assert_equal headers['Cache-Control'], 'public'
+    assert headers.has_key?('cache-control')
+    assert_equal headers['cache-control'], 'public'
   end # static simple
 
   it 'should serve static files with cache control and max_age' do
@@ -49,8 +49,8 @@ describe "Routing" do
       set :public_folder, File.dirname(__FILE__)
     end
     get "/#{File.basename(__FILE__)}"
-    assert headers.has_key?('Cache-Control')
-    assert_equal headers['Cache-Control'], 'public, must-revalidate, max-age=300'
+    assert headers.has_key?('cache-control')
+    assert_equal headers['cache-control'], 'public, must-revalidate, max-age=300'
   end # static max_age
 
   it 'should render static files with custom status via options' do
@@ -65,8 +65,8 @@ describe "Routing" do
 
     post "/#{File.basename(__FILE__)}?status=422"
     assert_equal response.status, 422
-    assert_equal File.size(__FILE__).to_s, response['Content-Length']
-    assert_includes response.headers, 'Last-Modified'
+    assert_equal File.size(__FILE__).to_s, response['content-length']
+    assert_includes response.headers, 'last-modified'
   end
 
   it 'should ignore trailing delimiters for basic route' do
@@ -444,11 +444,11 @@ describe "Routing" do
     end
 
     get "/"
-    assert_equal "http://example.org/", headers['Location']
+    assert_equal "http://example.org/", headers['location']
     get "/google"
-    assert_equal "http://google.com", headers['Location']
+    assert_equal "http://google.com", headers['location']
     get "/foo"
-    assert_equal "http://example.org/bar", headers['Location']
+    assert_equal "http://example.org/bar", headers['location']
   end
 
   it 'should return 406 on Accept-Headers it does not provide' do
@@ -474,7 +474,7 @@ describe "Routing" do
     mock_app do
       get(:text, :provides => :text) { "text" }
     end
-    header 'Accept', '*/*'
+    header 'accept', '*/*'
     get "/text"
     assert_equal 200, status
     assert_equal "text", body
@@ -794,16 +794,16 @@ describe "Routing" do
     end
     get "/a.js"
     assert_equal "js", body
-    assert_equal 'application/javascript;charset=utf-8', response["Content-Type"]
+    assert_equal 'application/javascript;charset=utf-8', response["content-type"]
     get "/a.json"
     assert_equal "json", body
-    assert_equal 'application/json', response["Content-Type"]
+    assert_equal 'application/json', response["content-type"]
     get "/a.foo"
     assert_equal "foo", body
-    assert_equal 'application/foo', response["Content-Type"]
+    assert_equal 'application/foo', response["content-type"]
     get "/a"
     assert_equal "html", body
-    assert_equal 'text/html;charset=utf-8', response["Content-Type"]
+    assert_equal 'text/html;charset=utf-8', response["content-type"]
   end
 
   it 'should not drop json charset' do
@@ -816,9 +816,9 @@ describe "Routing" do
       end
     end
     get '/'
-    assert_equal 'application/json;charset=utf-16', response["Content-Type"]
+    assert_equal 'application/json;charset=utf-16', response["content-type"]
     get '/a'
-    assert_equal 'application/json;charset=utf-16', response["Content-Type"]
+    assert_equal 'application/json;charset=utf-16', response["content-type"]
   end
 
   it 'should use controllers' do
@@ -1303,7 +1303,7 @@ describe "Routing" do
     get '/foo', {}, { 'CONTENT_TYPE' => 'application/xml' }
     assert ok?
     assert_equal 'application/xml', body
-    assert_equal 'application/xml;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/xml;charset=utf-8', response.headers['content-type']
     get '/foo'
     assert_equal 406, status
     get '/foo.xml'
@@ -1312,7 +1312,7 @@ describe "Routing" do
     get '/foo', {}, { 'CONTENT_TYPE' => 'application/json' }
     assert ok?
     assert_equal 'application/json', body
-    assert_equal 'application/json', response.headers['Content-Type']
+    assert_equal 'application/json', response.headers['content-type']
   end
 
   it 'should filters by media type when using :accepts as controller option' do
@@ -1339,20 +1339,20 @@ describe "Routing" do
     get '/foo', {}, { 'HTTP_ACCEPT' => 'application/xml' }
     assert ok?
     assert_equal 'application/xml', body
-    assert_equal 'application/xml;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/xml;charset=utf-8', response.headers['content-type']
 
     get '/foo.xml'
     assert ok?
-    assert_equal 'application/xml;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/xml;charset=utf-8', response.headers['content-type']
 
     get '/foo', {}, { 'HTTP_ACCEPT' => 'application/javascript' }
     assert ok?
     assert_equal 'application/javascript', body
-    assert_equal 'application/javascript;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/javascript;charset=utf-8', response.headers['content-type']
 
     get '/foo.js'
     assert ok?
-    assert_equal 'application/javascript;charset=utf-8', response.headers['Content-Type']
+    assert_equal 'application/javascript;charset=utf-8', response.headers['content-type']
 
     get '/foo', {}, { "HTTP_ACCEPT" => 'text/html' }
     assert_equal 406, status
